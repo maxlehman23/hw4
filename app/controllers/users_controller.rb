@@ -8,6 +8,6 @@ class UsersController < ApplicationController
     @user["email"] = params["email"]
     @user["password"] = params["password"]
     @user.save
-    redirect_to "/"
+    redirect_to "/login"
   end
 end
