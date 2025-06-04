@@ -1,30 +1,31 @@
 <h1>New Post</h1>
 
-<form action="/entries" method="post">
-  <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
+<% if current_user %>
+  <form action="/entries" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="place_id" value="<%= params["place_id"] %>">
 
-  <p>
-    <label for="title_input">Title</label>
-    <input type="text" name="title" id="title_input">
-  </p>
+    <p>
+      <label for="title_input">Title</label>
+      <input type="text" name="title" id="title_input">
+    </p>
 
-  <p>
-    <label for="occurred_on_input">Occurred On</label>
-    <input type="date" name="occurred_on" id="occurred_on_input">
-  </p>
+    <p>
+      <label for="occurred_on_input">Occurred On</label>
+      <input type="date" name="occurred_on" id="occurred_on_input">
+    </p>
 
-  <p class="mb-3">
-    <label for="uploaded_image_input" class="form-label">Upload Image</label>
-    <input type="file" name="uploaded_image" id="uploaded_image_input" class="form-control">
-  </p>
+    <p class="mb-3">
+      <label for="uploaded_image_input" class="form-label">Upload Image</label>
+      <input type="file" name="uploaded_image" id="uploaded_image_input" class="form-control">
+    </p>
 
-  <p>
-    <label for="description_input">Description</label>
-    <input type="text" name="description" id="description_input">
-  </p>
+    <p>
+      <label for="description_input">Description</label>
+      <input type="text" name="description" id="description_input">
+    </p>
 
-
-
-
-  <button>Save</button>
-</form>
+    <button>Save</button>
+  </form>
+<% else %>
+  <p>You must <a href="/login">log in</a> to create a new post.</p>
+<% end %>
