@@ -4,6 +4,7 @@
 <% for entry in @entries %>
   <h3><%= entry["title"] %></h3>
   <h4><%= entry["occurred_on"] %></h4>
+  <p><%= entry.uploaded_image.persisted? && image_tag(entry.uploaded_image.blob) %></p>
   <p><%= entry["description"] %></p>
 <% end %>
 
