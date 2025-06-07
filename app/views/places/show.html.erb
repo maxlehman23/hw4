@@ -1,17 +1,37 @@
-<h1><%= @place["name"] %></h1>
+<div class="container mt-4">
+  <h1 class="mb-4"><%= @place["name"] %></h1>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry.uploaded_image.persisted? && image_tag(entry.uploaded_image.blob) %></p>
-  <p><%= entry["description"] %></p>
-<% end %>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">My Entries</h2>
+    <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-primary">New Post</a>
+  </div>
 
-<p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Post</a>
-</p>
+  <% if @entries.any? %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @entries.each do |entry| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm p-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= entry["title"] %></h5>
+              <h6 class="card-subtitle text-muted mb-3"><%= entry["occurred_on"] %></h6>
 
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
+              <% if entry.uploaded_image.attached? %>
+                <div class="mb-3">
+                  <%= image_tag entry.uploaded_image, class: "img-fluid rounded", style: "max-height: 200px; object-fit: cover; width: 100%;" %>
+                </div>
+              <% end %>
+
+              <p class="card-text"><%= entry["description"] %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No entries yet.</p>
+  <% end %>
+
+  <div class="mt-4">
+    <a href="/places" class="btn btn-outline-secondary">Back to All Places</a>
+  </div>
+</div>
