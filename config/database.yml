@@ -22,4 +22,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: Lehman_HW4_production
+  username: Lehman_HW4
+  password: <%= ENV["LEHMAN_HW4_DATABASE_PASSWORD"] %>
